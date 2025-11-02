@@ -18,25 +18,41 @@ const io = socketIo(server, {
   allowEIO3: true
 });
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-// MySQL подключение
-const db = mysql.createConnection({
+// Тестовый эндпоинт
+app.get('/', (req, res) => {
+  res.json({ message: 'Сервер работает!', port: process.env.PORT || 3001 });
+});
+
+// MySQL пул соединений
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  multipleStatements: true
+  multipleStatements: true,
+  connectionLimit: 10,
+  acquireTimeout: 60000,
+  timeout: 60000,
+  reconnect: true
 });
 
-db.connect((err) => {
+// Проверка подключения к MySQL
+db.getConnection((err, connection) => {
   if (err) {
     console.error('Ошибка подключения к MySQL:', err);
     return;
   }
   console.log('Подключено к MySQL');
+  connection.release();
   
   // Создание таблиц
   db.query(`
@@ -45,6 +61,9 @@ db.connect((err) => {
       username VARCHAR(50) UNIQUE NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
+      avatar TEXT,
+      bio TEXT,
+      status VARCHAR(100) DEFAULT 'Онлайн',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
@@ -58,6 +77,54 @@ db.connect((err) => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (sender_id) REFERENCES users(id),
       FOREIGN KEY (receiver_id) REFERENCES users(id)
+    )
+  `);
+  
+  db.query(`
+    CREATE TABLE IF NOT EXISTS posts (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      content TEXT NOT NULL,
+      image TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `);
+  
+  db.query(`
+    CREATE TABLE IF NOT EXISTS likes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      post_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (post_id) REFERENCES posts(id),
+      UNIQUE KEY unique_like (user_id, post_id)
+    )
+  `);
+  
+  db.query(`
+    CREATE TABLE IF NOT EXISTS comments (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      post_id INT NOT NULL,
+      comment TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (post_id) REFERENCES posts(id)
+    )
+  `);
+  
+  db.query(`
+    CREATE TABLE IF NOT EXISTS friends (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      friend_id INT NOT NULL,
+      status ENUM('pending', 'accepted') DEFAULT 'pending',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (friend_id) REFERENCES users(id),
+      UNIQUE KEY unique_friendship (user_id, friend_id)
     )
   `);
 });
@@ -153,6 +220,15 @@ app.get('/api/users', authenticateToken, (req, res) => {
   db.query('SELECT id, username, email, avatar, status FROM users WHERE id != ?', [req.user.id], (err, results) => {
     if (err) return res.status(500).json({ error: 'Ошибка сервера' });
     res.json(results);
+  });
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    message: 'Server is running',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -433,7 +509,7 @@ app.delete('/api/friends/:userId', authenticateToken, (req, res) => {
   );
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Сервер запущен на порту ${PORT}`);
 });

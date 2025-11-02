@@ -1,0 +1,94 @@
+Ignoring invalid configuration option passed to Connection: acquireTimeout. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+Ignoring invalid configuration option passed to Connection: timeout. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+Ignoring invalid configuration option passed to Connection: reconnect. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+Сервер запущен на порту 3001
+Подключено к MySQL
+Данные входа: { email: 'Yra222225522@gmail.com', password: 'qwerty' }
+Пользователь подключился: 88c-hFCURckK_DFeAAAB
+Данные входа: { email: 'Yra222225522@gmail.com', password: 'qwerty' }
+Пользователь подключился: -ZhAE3LNU8Zv9CtKAAAD
+Пользователь отключился: -ZhAE3LNU8Zv9CtKAAAD
+Пользователь отключился: 88c-hFCURckK_DFeAAAB
+Пользователь подключился: hlZeRdyZSmLH_pf7AAAF
+Данные регистрации: {
+  username: 'Sloth',
+  email: 'z4v.roman.7A@yandex.ru',
+  password: '8577322Asdfghjkl'
+}
+Данные входа: { email: 'z4v.roman.7A@yandex.ru', password: '8577322Asdfghjkl' }
+Данные входа: { email: 'Yra222225522@gmail.com', password: 'qwerty' }
+Пользователь подключился: RsmcSj98XKr0wa5jAAAH
+Пользователь подключился: eaLjBzmhRGdpLvR8AAAJ
+Отправка сообщения через WebSocket: {
+  id: 46,
+  sender_id: 7,
+  receiver_id: 1,
+  message: 'Узбеки спят',
+  sender_name: 'Sloth',
+  created_at: 2025-11-02T09:28:32.183Z
+}
+Отправка сообщения через WebSocket: {
+  id: 47,
+  sender_id: 1,
+  receiver_id: 7,
+  message: 'Nndjdnx',
+  sender_name: 'Yra',
+  created_at: 2025-11-02T09:28:38.518Z
+}
+Пользователь отключился: RsmcSj98XKr0wa5jAAAH
+Отправка сообщения через WebSocket: {
+  id: 48,
+  sender_id: 1,
+  receiver_id: 7,
+  message: 'Узбеки спят',
+  sender_name: 'Yra',
+  created_at: 2025-11-02T09:29:00.280Z
+}
+Отправка сообщения через WebSocket: {
+  id: 49,
+  sender_id: 1,
+  receiver_id: 7,
+  message: 'Щршршп',
+  sender_name: 'Yra',
+  created_at: 2025-11-02T09:29:10.012Z
+}
+Пользователь отключился: eaLjBzmhRGdpLvR8AAAJ
+Пользователь подключился: FWQwgUJZhJWZDg_oAAAL
+Пользователь отключился: FWQwgUJZhJWZDg_oAAAL
+Пользователь подключился: w3YPKqL-Sr8oKhO3AAAN
+Пользователь отключился: w3YPKqL-Sr8oKhO3AAAN
+Пользователь подключился: Lwcvw71nT6V1QHv2AAAP
+Пользователь отключился: Lwcvw71nT6V1QHv2AAAP
+Пользователь подключился: qtq2WmH6bVIdZyaJAAAR
+Пользователь отключился: qtq2WmH6bVIdZyaJAAAR
+Пользователь отключился: hlZeRdyZSmLH_pf7AAAF
+Пользователь подключился: tUTEsvr_HVh5sVr_AAAT
+Данные входа: { email: 'Yra222225522@gmail.com', password: 'qwerty' }
+Пользователь подключился: MUkoq0Y81M8325d6AAAV
+Пользователь подключился: aNSwQwzLQV_E0TJBAAAX
+Пользователь отключился: MUkoq0Y81M8325d6AAAV
+Пользователь отключился: aNSwQwzLQV_E0TJBAAAX
+Пользователь подключился: 2o2Ww0f9KTxFse7IAAAZ
+Пользователь подключился: 8tabMDVOfWHsxhutAAAb
+Пользователь отключился: 8tabMDVOfWHsxhutAAAb
+Пользователь подключился: Zt_2hONS7FKKyxhnAAAd
+Пользователь отключился: Zt_2hONS7FKKyxhnAAAd
+Пользователь отключился: 2o2Ww0f9KTxFse7IAAAZ
+Пользователь подключился: UzJ2gBs79hNA7KRwAAAf
+Пользователь отключился: UzJ2gBs79hNA7KRwAAAf
+Пользователь подключился: Vdyufp_w5kx1r1PCAAAh
+Пользователь отключился: Vdyufp_w5kx1r1PCAAAh
+Пользователь подключился: i_RHAsvCgy8ejgdkAAAj
+Пользователь подключился: zuU01mPT-08Q-nd_AAAl
+Пользователь отключился: i_RHAsvCgy8ejgdkAAAj
+Пользователь подключился: tRbtuXxYXLI5zJFPAAAn
+Пользователь отключился: tRbtuXxYXLI5zJFPAAAn
+Пользователь подключился: jZylgjvdZYm_BYJYAAAp
+Пользователь отключился: jZylgjvdZYm_BYJYAAAp
+Пользователь подключился: IFaRLXvUGkwjLXTRAAAr
+Пользователь отключился: tUTEsvr_HVh5sVr_AAAT
+Пользователь отключился: IFaRLXvUGkwjLXTRAAAr
+Пользователь подключился: plLPog42otVPn13JAAAt
+Данные входа: { email: 'Yra222225522@gmail.com', password: 'qwerty' }
+Пользователь отключился: plLPog42otVPn13JAAAt
+Пользователь отключился: zuU01mPT-08Q-nd_AAAl
